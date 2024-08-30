@@ -13,8 +13,8 @@ let isGameOver = false;
 let isGameRunning = false;
 let animationFrameId;
 
-// Set initial positions
-let playerPosition = 175; // Player starts in the middle
+//setting the initial positions
+let playerPosition = 175; //putting the player bar in the middle
 let objectPosition = { top: 10, left: Math.random() * 350, direction: 10 };
 
 highScoreDisplay.innerText = highScore;
@@ -28,7 +28,7 @@ function movePlayer(e) {
 
   if (e.keyCode === 37 && playerPosition > 0) {
     playerPosition -= 30;
-  } else if (e.keyCode === 39 && playerPosition < 300) { // 300 to account for bucket width
+  } else if (e.keyCode === 39 && playerPosition < 300) { //increased the bucket width
     playerPosition += 30;
   }
 
@@ -70,7 +70,7 @@ function dropObject() {
   objectPosition.top += objectPosition.direction;
   object.style.top = objectPosition.top + 'px';
 
-  // Check for collision with player (bucket)
+  //to check the collision
   if (objectPosition.top > 500 && objectPosition.left > playerPosition - 5 && objectPosition.left < playerPosition + 50) {
     score++;
     scoreDisplay.innerText = score;
@@ -78,7 +78,7 @@ function dropObject() {
     resetObject();
   }
 
-  // Check if the object hits the bottom (missed catch)
+  //checking if the mango not catched in the box.
   if (objectPosition.top > 500) {
     gameOver();
   } else {
