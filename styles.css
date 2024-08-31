@@ -38,11 +38,19 @@ body {
 .player {
   position: absolute;
   background-color: #333;
+<<<<<<< HEAD
   width: 90px; /* Set width of the player (bucket) */
   height: 70px; /* Set height of the player (bucket) */
   background-image: url('bucket.png'); /* Path to your bucket image */
   background-size: cover; /* Make sure the image covers the element */
   bottom: 0; /* Position at the bottom of the container */
+=======
+  width: 70px; /*Width of the bucket */
+  height: 70px; /*height of the bucket*/
+  background-image: url('bucket.png');
+  background-size: cover;
+  bottom: 0;
+>>>>>>> 8ce9a71e96c8697e6b78f9d8e322b3e57871b2ae
   left: 175px; 
 }
 

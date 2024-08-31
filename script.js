@@ -13,9 +13,15 @@ let isGameOver = false;
 let isGameRunning = false;
 let animationFrameId;
 
+<<<<<<< HEAD
 // Set initial positions
 let playerPosition = 175; // Player starts in the middle
 let objectPosition = { top: 10, left: Math.random() * 350, direction: 3, speedIncrease: 0.5 }; // Slower initial speed
+=======
+//setting the initial positions
+let playerPosition = 175; //putting the player bar in the middle
+let objectPosition = { top: 10, left: Math.random() * 350, direction: 10 };
+>>>>>>> 8ce9a71e96c8697e6b78f9d8e322b3e57871b2ae
 
 highScoreDisplay.innerText = highScore;
 
@@ -27,9 +33,15 @@ function movePlayer(e) {
   if (!isGameRunning) return;
 
   if (e.keyCode === 37 && playerPosition > 0) {
+<<<<<<< HEAD
     playerPosition -= 20;
   } else if (e.keyCode === 39 && playerPosition < 330) { // Adjusted for smoother movement
     playerPosition += 20;
+=======
+    playerPosition -= 30;
+  } else if (e.keyCode === 39 && playerPosition < 300) { //increased the bucket width
+    playerPosition += 30;
+>>>>>>> 8ce9a71e96c8697e6b78f9d8e322b3e57871b2ae
   }
 
   player.style.left = playerPosition + 'px';
@@ -71,8 +83,13 @@ function dropObject() {
   objectPosition.top += objectPosition.direction;
   object.style.top = objectPosition.top + 'px';
 
+<<<<<<< HEAD
   // Check for collision with player (bucket)
   if (objectPosition.top > 500 && objectPosition.left > playerPosition - 5 && objectPosition.left < playerPosition + 70) {
+=======
+  //to check the collision
+  if (objectPosition.top > 500 && objectPosition.left > playerPosition - 5 && objectPosition.left < playerPosition + 50) {
+>>>>>>> 8ce9a71e96c8697e6b78f9d8e322b3e57871b2ae
     score++;
     scoreDisplay.innerText = score;
     catchSound.play(); // Play catch sound
@@ -84,8 +101,13 @@ function dropObject() {
     }
   }
 
+<<<<<<< HEAD
   // Check if the object hits the bottom (missed catch)
   if (objectPosition.top > 550) {
+=======
+  //checking if the mango not catched in the box.
+  if (objectPosition.top > 500) {
+>>>>>>> 8ce9a71e96c8697e6b78f9d8e322b3e57871b2ae
     gameOver();
   } else {
     animationFrameId = requestAnimationFrame(dropObject);
