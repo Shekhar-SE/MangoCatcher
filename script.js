@@ -15,7 +15,7 @@ let animationFrameId;
 
 // Set initial positions
 let playerPosition = 175; // Player starts in the middle
-let objectPosition = { top: 10, left: Math.random() * 350, direction: 10 };
+let objectPosition = { top: 10, left: Math.random() * 350, direction: 3, speedIncrease: 0.5 }; // Slower initial speed
 
 highScoreDisplay.innerText = highScore;
 
@@ -27,9 +27,9 @@ function movePlayer(e) {
   if (!isGameRunning) return;
 
   if (e.keyCode === 37 && playerPosition > 0) {
-    playerPosition -= 30;
-  } else if (e.keyCode === 39 && playerPosition < 300) { // 300 to account for bucket width
-    playerPosition += 30;
+    playerPosition -= 20;
+  } else if (e.keyCode === 39 && playerPosition < 330) { // Adjusted for smoother movement
+    playerPosition += 20;
   }
 
   player.style.left = playerPosition + 'px';
@@ -45,7 +45,8 @@ function startGame() {
   playerPosition = 175;
   objectPosition.top = 0;
   objectPosition.left = Math.random() * 350;
-  objectPosition.direction = 5;
+  objectPosition.direction = 3; // Reset to initial speed
+  objectPosition.speedIncrease = 0.5;
 
   player.style.left = playerPosition + 'px';
   object.style.left = objectPosition.left + 'px';
@@ -71,15 +72,20 @@ function dropObject() {
   object.style.top = objectPosition.top + 'px';
 
   // Check for collision with player (bucket)
-  if (objectPosition.top > 500 && objectPosition.left > playerPosition - 5 && objectPosition.left < playerPosition + 50) {
+  if (objectPosition.top > 500 && objectPosition.left > playerPosition - 5 && objectPosition.left < playerPosition + 70) {
     score++;
     scoreDisplay.innerText = score;
     catchSound.play(); // Play catch sound
     resetObject();
+
+    // Gradually increase difficulty
+    if (score % 15 === 0) {
+      objectPosition.direction += objectPosition.speedIncrease;
+    }
   }
 
   // Check if the object hits the bottom (missed catch)
-  if (objectPosition.top > 500) {
+  if (objectPosition.top > 550) {
     gameOver();
   } else {
     animationFrameId = requestAnimationFrame(dropObject);
@@ -91,6 +97,12 @@ function resetObject() {
   objectPosition.left = Math.random() * 350;
   object.style.left = objectPosition.left + 'px';
   object.style.top = objectPosition.top + 'px';
+  object.style.opacity = 0; // Make mango fade instantly after a catch
+
+  // Fade back in for next drop
+  setTimeout(() => {
+    object.style.opacity = 1;
+  }, 50);
 }
 
 function gameOver() {
